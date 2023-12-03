@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'key')
 
-DEBUG = bool(strtobool(os.getenv('DEBUG', 'false')))
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['158.160.82.27', '127.0.0.1', 'localhost', 'alextrianohost.ddnsking.com']
 
