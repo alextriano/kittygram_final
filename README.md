@@ -1,26 +1,47 @@
-#  Как работать с репозиторием финального задания
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/alextriano/kittygram_final/Add%20fix16)
 
-## Что нужно сделать
+# Kittygram
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+## О проекте
 
-## Как проверить работу с помощью автотестов
+В данном сервисе реализована соцсеть для владельцев кошек, в которой можно делиться фото котов и их достижениями.
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+## Технологии
+
+Python 3.9, Django 4.1, Django REST framework, React, Docker, Nginx.
+
+## Запуск проекта на локальном компьютере
+
+Клонировать репозиторий и перейти в него в командной строке:
+```bash
+git clone https://github.com/alextriano/kittygram_final.git
+cd kittygram_final
 ```
-
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
-
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
-
-## Чек-лист для проверки перед отправкой задания
-
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+Создать файл .evn для хранения ключей:
+```bash
+SECRET_KEY='указать секретный ключ'
+ALLOWED_HOSTS='указать имя или IP хоста'
+POSTGRES_DB=kittygram
+POSTGRES_USER=kittygram_user
+POSTGRES_PASSWORD=kittygram_password
+DB_NAME=kittygram
+DB_HOST=db
+DB_PORT=5432
+DEBUG=False
+```
+Запустить docker-compose.production:
+```bash
+docker compose -f docker-compose.production.yml up
+```
+Выполнить миграции, сбор статики:
+```bash
+docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
+```
+Создать суперпользователя, ввести почту, логин, пароль:
+```bash
+docker compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
+```
+# Автор проекта
+[Александр Волков](https://github.com/alextriano)
