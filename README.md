@@ -1,4 +1,4 @@
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/alextriano/kittygram_final/Add%20fix16)
+[![.github/workflows/main.yml](https://github.com/alextriano/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/alextriano/kittygram_final/actions/workflows/main.yml)
 
 # Kittygram
 
