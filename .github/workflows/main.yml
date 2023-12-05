@@ -42,7 +42,6 @@ jobs:
         cd backend/
         python manage.py test
 
-on:
   push:
     branches:
       - master
